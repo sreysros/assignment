@@ -1,8 +1,10 @@
 import React from 'react';
+import Icon from 'react-native-vector-icons/Octicons';
 import Container from './components/Container/Container';
 import {
     FlatList,
     Image,
+  ImageBackground,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -80,20 +82,33 @@ const HomeScreen = () => {
     }
     const renderItem = ({item, index}) => {
         return (
-            <View style={{padding: 20, 
-            marginBottom: 10, 
-            marginHorizontal: 10, 
-            backgroundColor: '#f9fafb',
-		borderRadius: 10,
-		shadowColor: '#000',
-		shadowOffset: {
-			width: 0,
-			height: 1,
-		},
-		shadowRadius: 1,
-		shadowOpacity: 0.3,
-		elevation: 2,
-		height: 340}}>
+            <View style={{ 
+                paddingHorizontal: 20,
+                marginBottom: 10, 
+                marginHorizontal: 10, 
+                backgroundColor: '#f9fafb',
+                borderRadius: 10,
+                shadowColor: '#000',
+                shadowOffset: {
+                    width: 0,
+                    height: 1,
+                },
+                shadowRadius: 1,
+                shadowOpacity: 0.3,
+                elevation: 2,
+                height: 340}}>
+                <View>
+						<View style={{width: 120, height: 30, backgroundColor: 'red', justifyContent: 'center', alignSelf: 'flex-end', borderBottomLeftRadius: 10, borderTopRightRadius: 10, marginRight: -20}}>
+							<View style={{alignItems: 'center', flexDirection: 'row', alignSelf: 'center'}}>
+                                <Text style={{fontSize: 16, color: 'white', fontWeight: 'bold'}}>4</Text>
+                            <Icon name='star-fill' size={14} style={{color: 'white', marginHorizontal: 6}}/>
+                            <Text style={{fontSize: 14, fontWeight: '200',color: 'white'}}>| 1 Review</Text>
+                            
+                            </View>
+                            
+                        </View>
+					</View>
+
                     <Image source={item.profile} style={{width: 117, height: 117, borderRadius: 117/2, alignSelf: 'center', marginVertical: 10}} />
                 <Text style={{fontSize: 18, fontWeight: '600', marginBottom: 6}} numberOfLines={2}>{item.name}</Text>
                 <Text style={{fontSize: 14, marginBottom: 6}} numberOfLines={2}>{item.address}</Text>
