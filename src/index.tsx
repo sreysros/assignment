@@ -76,6 +76,59 @@ const listData = [
     posted_date: '2022-01-20'
                                 }
 ]
+
+const categories = [
+    {
+        id: 1,
+        name: 'Hotel',
+        image: Images.associate.icAcodo,
+    },
+    {
+        id: 2,
+        name: 'Association',
+        image: Images.associate.icAcodo,
+    },
+    {
+        id: 3,
+        name: 'Petrol Pumps',
+        image: Images.associate.icAcodo,
+    },
+    {
+        id: 4,
+        name: 'Internet',
+        image: Images.associate.icAcodo,
+    },
+    {
+        id: 5,
+        name: 'Factory',
+        image: Images.associate.icAcodo,
+    },
+    {
+        id: 6,
+        name: 'Company',
+        image: Images.associate.icAcodo,
+    },
+    {
+        id: 7,
+        name: 'Company',
+        image: Images.associate.icAcodo,
+    },
+    {
+        id: 8,
+        name: 'Bank & Finance',
+        image: Images.associate.icAcodo,
+    },
+    {
+        id: 9,
+        name: 'Garage',
+        image: Images.associate.icAcodo,
+    },
+    {
+        id: 10,
+        name: 'Lawyers',
+        image: Images.associate.icAcodo,
+    }
+]
 const HomeScreen = () => {
     const formatDate = (date) => {
         return moment(date).startOf('day').fromNow();
@@ -85,7 +138,6 @@ const HomeScreen = () => {
             <View style={{ 
                 paddingHorizontal: 20,
                 marginBottom: 10, 
-                marginHorizontal: 10, 
                 backgroundColor: '#f9fafb',
                 borderRadius: 10,
                 shadowColor: '#000',
@@ -119,6 +171,14 @@ const HomeScreen = () => {
         )
 
     }
+    const renderCategories = ({item, index}) => {
+        return (
+            <View style={{marginHorizontal: 20}}>
+                <Image source={item.image} style={{width: 80, height: 80, borderRadius: 40}} />
+                <Text style={{fontSize: 12, color: 'gray'}}>{item.name}</Text>
+            </View>
+        )
+    }
     return (
 <Container style={{flex:1}} isSafeAreaView>
     <View>
@@ -139,9 +199,22 @@ const HomeScreen = () => {
                 </TouchableOpacity>
                 
             </View>
-            <Text style={{fontWeight: 'bold', fontSize: 20, color: 'red', alignSelf:'center', marginTop: 14}}>Association</Text>
-            <View style={{marginVertical: 4, width: 70, backgroundColor: 'red', height: 4, alignSelf: 'center', marginRight: 40, marginBottom: 14}} />
+            <View style={{marginHorizontal: 16}}>
+                <Text style={{fontWeight: 'bold', fontSize: 20, color: 'red', alignSelf:'center', marginTop: 14}}>Professional Services</Text>
+            <View style={{marginVertical: 4, width: 70, backgroundColor: 'red', height: 4, alignSelf: 'center', marginLeft: -130, marginBottom: 14}} />
+            
+            <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 24, marginBottom: 10}}>
+                <View style={{width: 120, height:1, backgroundColor: 'gray'}} />
+                <Text style={{paddingHorizontal: 6, fontSize: 16, color: 'red', letterSpacing: 1}}>CATEGORIES</Text>
+                <View style={{width: 120, height:1, backgroundColor: 'gray'}} />
+            </View>
+            
+        
+            <FlatList numColumns={4} data={categories} renderItem={renderCategories} contentContainerStyle={{paddingVertical: 10}} />
+            
             <FlatList data={listData} renderItem={renderItem} style={{marginBottom: 140}} contentContainerStyle={{paddingVertical: 10}} />
+            </View>
+            
 </View>
             </Container>
     )
