@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Icon from 'react-native-vector-icons/Octicons';
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
+import {TabViewVertical} from 'react-native-vertical-tab-view';
+import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
+
 import Container from './components/Container/Container';
 import {
+    Alert,
     FlatList,
     Image,
   ImageBackground,
+  Pressable,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -13,10 +19,12 @@ import {
   Touchable,
   TouchableOpacity,
   useColorScheme,
+  useWindowDimensions,
   View,
 } from 'react-native';
 import Images from './theme/images';
 import moment from 'moment';
+import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 
 const listData = [
     {id:1,
@@ -129,7 +137,7 @@ const categories = [
         image: Images.associate.icAcodo,
     }
 ]
-const HomeScreen = () => {
+const HomeScreen = (props) => {
     const formatDate = (date) => {
         return moment(date).startOf('day').fromNow();
     }
@@ -173,46 +181,70 @@ const HomeScreen = () => {
     }
     const renderCategories = ({item, index}) => {
         return (
-            <View style={{marginHorizontal: 20}}>
-                <Image source={item.image} style={{width: 80, height: 80, borderRadius: 40}} />
-                <Text style={{fontSize: 12, color: 'gray'}}>{item.name}</Text>
+            <Pressable style={{marginHorizontal: 20, marginBottom: 20}} onPress={() => console.log('header click')}>
+                <ImageBackground blurRadius={3} source={item.image} style={{width: 80, height: 80, justifyContent:'center'}} imageStyle={{borderRadius: 40, }}>
+                    <Text style={{fontSize: 40, color: '#fff', fontWeight: 'bold', alignSelf: 'center'}}>{item.name.charAt(0)}</Text>
+                </ImageBackground>
+                <Text style={{fontSize: 12, color: 'gray', textAlign: 'center', marginTop: 4}}>{item.name}</Text>
+            </Pressable>
+        )
+    }
+
+    const Header = () => {
+        return (
+            <View style={{marginBottom: 20}}>
+                <FlatList keyExtractor={(item, index) => index.toString()} numColumns={3} data={categories} renderItem={renderCategories} contentContainerStyle={{height: 650, flexDirection: 'row', justifyContent: 'space-evenly'}} />
+            </View>
+        )
+    }
+
+    const Footer = () => {
+        return (
+            <View style={{marginBottom: 430}}>
+                <FlatList data={listData} renderItem={renderItem} contentContainerStyle={{paddingVertical: 10}} />
             </View>
         )
     }
     return (
 <Container style={{flex:1}} isSafeAreaView>
     <View>
-			<View style={{marginVertical: 20, flex:1, backgroundColor: 'green', justifyContent: 'center', alignItems: 'center'}}>
+            <View style={{marginVertical: 30, flex:1, justifyContent: 'center', alignItems: 'center'}}>
                 <Image
-                width={86} height={40} 
-        style={{width: 86, height: 40}}
-        source={Images.home.icLogo}
-      />
+                    width={86} height={40} 
+                    style={{width: 86, height: 40}}
+                    source={Images.home.icLogo}
+                />
             </View>
+            
             <View style={{marginTop: 20, flexDirection: 'row', justifyContent: 'space-evenly', height: 40, alignContent: 'center'}}>
-                <TouchableOpacity onPress={() =>console.log('filter')} style={{alignItems:'center', justifyContent:'center', height: 40, borderLeftWidth: 0, borderRightWidth: 0, borderColor: 'black', borderWidth: 1, flex:1}}>
-
-                    <Text>Filter</Text>
+                <TouchableOpacity onPressIn={() => props.navigation.navigate('TabBarView')} style={{alignItems:'center', justifyContent:'center', height: 40, borderLeftWidth: 0, borderRightWidth: 0, borderColor: 'black', borderWidth: 1, flex:1, flexDirection: 'row'}}>
+                    <FontAwesome5Icon name='filter' size={14} style={{color: 'black', marginHorizontal: 6}}/>
+                        <Text>Filter</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() =>console.log('sorted')} style={{alignItems:'center', justifyContent:'center', height: 40, borderColor: 'black', borderWidth: 1, flex:1, borderRightWidth: 0}}>
+                <TouchableOpacity onPress={() =>console.log('sorted')} style={{alignItems:'center', justifyContent:'center', height: 40, borderColor: 'black', borderWidth: 1, flex:1, borderRightWidth: 0, flexDirection: 'row'}}>
+                <FontAwesome5Icon name='sort' size={14} style={{color: 'black', marginHorizontal: 6}}/>
                     <Text>Sort</Text>
                 </TouchableOpacity>
-                
             </View>
             <View style={{marginHorizontal: 16}}>
                 <Text style={{fontWeight: 'bold', fontSize: 20, color: 'red', alignSelf:'center', marginTop: 14}}>Professional Services</Text>
             <View style={{marginVertical: 4, width: 70, backgroundColor: 'red', height: 4, alignSelf: 'center', marginLeft: -130, marginBottom: 14}} />
             
-            <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 24, marginBottom: 10}}>
+            <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 14, marginBottom: 10}}>
                 <View style={{width: 120, height:1, backgroundColor: 'gray'}} />
                 <Text style={{paddingHorizontal: 6, fontSize: 16, color: 'red', letterSpacing: 1}}>CATEGORIES</Text>
                 <View style={{width: 120, height:1, backgroundColor: 'gray'}} />
             </View>
             
         
-            <FlatList numColumns={4} data={categories} renderItem={renderCategories} contentContainerStyle={{paddingVertical: 10}} />
-            
-            <FlatList data={listData} renderItem={renderItem} style={{marginBottom: 140}} contentContainerStyle={{paddingVertical: 10}} />
+            <FlatList
+            data={listData}
+            keyExtractor={(item, index) => index.toString()}
+            ListHeaderComponent={Header}
+            ListFooterComponent={Footer}
+            showsVerticalScrollIndicator={false}
+            />
+
             </View>
             
 </View>
