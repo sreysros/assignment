@@ -2,14 +2,14 @@ import React from 'react';
 import { createStackNavigator, StackNavigationOptions, HeaderStyleInterpolators } from '@react-navigation/stack';
 import  Icon from 'react-native-vector-icons/Octicons';
 import HomeScreen from './index';
-import TabBarView from './tabBarView';
+import TabBarView from './TabBarView';
 
 const Stack = createStackNavigator();
 
 export const stackOption: StackNavigationOptions = {
 	headerBackTitleVisible: false,
 	headerStyle: {
-		backgroundColor: 'blue',
+		backgroundColor: 'white',
 		shadowOpacity: 0,
 		elevation: 0,
 	},
@@ -31,7 +31,7 @@ const AuthStack = () => {
 			/>
 			<Stack.Screen
 				name={'TabBarView'}
-				options={{ title: ''}}
+				options={{ title: 'Filter', headerTitleAlign: 'center'}}
 				component={TabBarView}
 			/>
 			

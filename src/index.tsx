@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 import Icon from 'react-native-vector-icons/Octicons';
-import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
-import {TabViewVertical} from 'react-native-vertical-tab-view';
-import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 
 import Container from './components/Container/Container';
 import {
