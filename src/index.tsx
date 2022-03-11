@@ -214,7 +214,7 @@ const HomeScreen = (props) => {
             </View>
             
             <View style={{marginTop: 20, flexDirection: 'row', justifyContent: 'space-evenly', height: 40, alignContent: 'center'}}>
-                <TouchableOpacity onPressIn={() => props.navigation.navigate('TabBarView')} style={{alignItems:'center', justifyContent:'center', height: 40, borderLeftWidth: 0, borderRightWidth: 0, borderColor: 'black', borderWidth: 1, flex:1, flexDirection: 'row'}}>
+                <TouchableOpacity onPressIn={() => props.navigation.navigate('TabScreen')} style={{alignItems:'center', justifyContent:'center', height: 40, borderLeftWidth: 0, borderRightWidth: 0, borderColor: 'black', borderWidth: 1, flex:1, flexDirection: 'row'}}>
                     <FontAwesome5Icon name='filter' size={14} style={{color: 'black', marginHorizontal: 6}}/>
                         <Text>Filter</Text>
                 </TouchableOpacity>
